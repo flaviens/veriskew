@@ -1,4 +1,5 @@
 export SIMSRAMELF=$PWD/misc/app.elf
 export SIMSRAMAUX=$PWD/misc/metadata
-fusesoc library add run .
-fusesoc run run
+export TRACEFILE=$PWD/sim.fst
+
+obj_dir/Variane_tiny_soc --trace

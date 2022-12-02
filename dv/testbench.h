@@ -6,11 +6,7 @@
 #include "verilated.h"
 
 #if VM_TRACE
-#if VM_TRACE_FST
 #include <verilated_fst_c.h>
-#else
-#include <verilated_vcd_c.h>
-#endif // VM_TRACE_FST
 #endif // VM_TRACE
 
 #include <iostream>
@@ -19,15 +15,7 @@
 #ifndef TESTBENCH_H
 #define TESTBENCH_H
 
-const int kResetLength = 5;
-#if VM_TRACE
-// Depth of the trace.
-const int kTraceLevel = 6;
-#endif // VM_TRACE
-
 typedef Variane_tiny_soc Module;
-
-bool display_ffevents = true;
 
 // This class implements elementary interaction with the design under test.
 class Testbench {
@@ -35,12 +23,8 @@ class Testbench {
   Testbench(const std::string &trace_filename = "")
       : module_(new Module), tick_count_(0l) {
 #if VM_TRACE
-#if VM_TRACE_FST
     trace_ = new VerilatedFstC;
-#else // VM_TRACE_FST
-    trace_ = new VerilatedVcdC;
-#endif // VM_TRACE_FST
-    module_->trace(trace_, kTraceLevel);
+    module_->trace(trace_, 6);
     trace_->open(trace_filename.c_str());
 #endif // VM_TRACE
   }
@@ -51,7 +35,7 @@ class Testbench {
     module_->rst_ni = 1;
     this->tick(1);
     module_->rst_ni = 0;
-    this->tick(kResetLength);
+    this->tick(5);
     module_->rst_ni = 1;
   }
 
@@ -74,33 +58,33 @@ class Testbench {
       tick_count_++;
 
       module_->clk_i = 0;
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("Before eval 0 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("Before eval 0 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
       module_->eval();
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("After  eval 0 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("After  eval 0 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
 
 #if VM_TRACE
       trace_->dump(5 * tick_count_ - 1);
 #endif // VM_TRACE
 
       module_->clk_i = !false_tick;
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("Before eval 1 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("Before eval 1 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
       module_->eval();
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("After  eval 1 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("After  eval 1 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
 
 #if VM_TRACE
       trace_->dump(5 * tick_count_);
 #endif // VM_TRACE
 
       module_->clk_i = 0;
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("Before eval 2 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("Before eval 2 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
       module_->eval();
-      if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
-        printf("After  eval 2 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
+      // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
+      //   printf("After  eval 2 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
 
 #if VM_TRACE
       trace_->dump(5 * tick_count_ + 2);
@@ -115,11 +99,7 @@ class Testbench {
   vluint32_t tick_count_;
 
 #if VM_TRACE
-#if VM_TRACE_FST
   VerilatedFstC *trace_;
-#else // VM_TRACE_FST
-  VerilatedVcdC *trace_;
-#endif // VM_TRACE_FST
 #endif // VM_TRACE
 
   // Masks that contain ones in the corresponding fields.

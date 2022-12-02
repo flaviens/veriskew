@@ -2,9 +2,6 @@
 // Licensed under the General Public License, Version 3.0, see LICENSE for details.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include "Variane_tiny_soc__Syms.h"
-#include "Variane_tiny_soc___024root.h"
-
 #include "testbench.h"
 #include "ticks.h"
 
@@ -20,9 +17,7 @@ static inline long tb_run_ticks_stoppable(Testbench *tb, int simlen, bool reset 
 
   auto start = std::chrono::steady_clock::now();
   for (size_t step_id = 0; step_id < simlen; step_id++) {
-    // printf("Before tick: %lx, %lx.\n", tb->module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, tb->module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
     tb->tick();
-    // printf("After tick : %lx, %lx.\n", tb->module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, tb->module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
 
     if (step_id == simlen-1)
       std::cout << "Reached simulation length (" << simlen << " cycles). Stopping." << std::endl;

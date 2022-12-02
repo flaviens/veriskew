@@ -4,12 +4,15 @@
 
 #include "Variane_tiny_soc.h"
 #include "verilated.h"
+#include "Variane_tiny_soc___024root.h"
+#include "Variane_tiny_soc__Syms.h"
 
 #if VM_TRACE
 #include <verilated_fst_c.h>
 #endif // VM_TRACE
 
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 
 #ifndef TESTBENCH_H
@@ -39,6 +42,47 @@ class Testbench {
     module_->rst_ni = 1;
   }
 
+  // Must be called once at the end of the recording.
+  void save_recording(const std::string &recording_filename = "") {
+    std::ofstream recording_stream;
+    recording_stream.open(recording_filename.c_str());
+    recording_stream << recording_strings.size() << '\n';
+    for (auto recording_line: recording_strings) {
+      for (auto line_token: recording_line)
+        recording_stream << line_token << " ";
+      recording_stream << "\n";
+    }
+    recording_stream.close();
+  }
+
+  void record_step() {
+    std::vector<uint64_t> curr_line;
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.rst_ni));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.icache_data_req_i));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_req_i));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.icache_data_i));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i[0]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i[1]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i[2]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i[3]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i[4]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i[0]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i[1]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i[2]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.icache_data_req_i_t0));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_req_i_t0));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.icache_data_i_t0));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i_t0[0]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i_t0[1]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i_t0[2]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i_t0[3]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_i_t0[4]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i_t0[0]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i_t0[1]));
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.axi_resp_i_t0[2]));
+    recording_strings.push_back(curr_line);
+  }
+
   void close_trace(void) {
 #if VM_TRACE  
     trace_->close();
@@ -56,6 +100,8 @@ class Testbench {
       printf("--Tick %d--\n", tick_count_);
 
       tick_count_++;
+
+      record_step();
 
       module_->clk_i = 0;
       // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
@@ -95,6 +141,7 @@ class Testbench {
   }
 
   std::unique_ptr<Module> module_;
+  std::vector<std::vector<uint64_t>> recording_strings;
  private:
   vluint32_t tick_count_;
 

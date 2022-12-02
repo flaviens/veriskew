@@ -24,6 +24,16 @@ static const char *cl_get_tracefile(void)
   return "";
 #endif
 }
+static const char *cl_get_recordingfile(void)
+{
+#if VM_TRACE
+  const char *trace_env = std::getenv("RECORDINGFILE"); // allow override for batch execution from python
+  if(trace_env == NULL) { std::cerr << "RECORDINGFILE environment variable not set." << std::endl; exit(1); }
+  return trace_env;
+#else
+  return "";
+#endif
+}
 
 static inline long tb_run_ticks(Testbench *tb, int simlen, bool reset = false) {
   if (reset)

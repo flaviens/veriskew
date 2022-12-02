@@ -61,6 +61,12 @@ int main(int argc, char **argv, char **env) {
   unsigned int duration = run_test(tb, simlen, true);
 
   ////////
+  // Save the recording.
+  ////////
+
+  tb->save_recording(cl_get_recordingfile());
+
+  ////////
   // Display the results.
   ////////
   std::cout << "Testbench complete!" << std::endl;

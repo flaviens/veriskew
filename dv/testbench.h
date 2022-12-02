@@ -57,6 +57,7 @@ class Testbench {
 
   void record_step() {
     std::vector<uint64_t> curr_line;
+    curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.clk_i));
     curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.rst_ni));
     curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.icache_data_req_i));
     curr_line.push_back(((uint64_t) module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.dcache_data_req_i));
@@ -114,6 +115,8 @@ class Testbench {
       trace_->dump(5 * tick_count_ - 1);
 #endif // VM_TRACE
 
+      record_step();
+
       module_->clk_i = !false_tick;
       // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)
       //   printf("Before eval 1 - 0672:%lx, 1154:%lx.\n", module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672, module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154);
@@ -124,6 +127,8 @@ class Testbench {
 #if VM_TRACE
       trace_->dump(5 * tick_count_);
 #endif // VM_TRACE
+
+      record_step();
 
       module_->clk_i = 0;
       // if (module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_0672 | module_->rootp->vlSymsp->TOP__ariane_tiny_soc__i_ariane_mem_top__i_ariane__i_cva6__i_cache_subsystem__i_adapter.signal_1154)

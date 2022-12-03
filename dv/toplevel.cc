@@ -17,7 +17,7 @@ static inline long tb_run_ticks_stoppable(Testbench *tb, int simlen, bool reset 
 
   auto start = std::chrono::steady_clock::now();
   for (size_t step_id = 0; step_id < simlen; step_id++) {
-    tb->tick();
+    tb->tick(simlen);
 
     if (step_id == simlen-1)
       std::cout << "Reached simulation length (" << simlen << " cycles). Stopping." << std::endl;
@@ -43,12 +43,6 @@ int main(int argc, char **argv, char **env) {
   Verilated::traceEverOn(VM_TRACE);
 
   ////////
-  // Get the env vars early to avoid Verilator segfaults.
-  ////////
-
-  int simlen = 60;
-
-  ////////
   // Initialize testbench.
   ////////
 
@@ -58,13 +52,10 @@ int main(int argc, char **argv, char **env) {
   // Run the testbench.
   ////////
 
-  unsigned int duration = run_test(tb, simlen, true);
+  tb->reset();
 
-  ////////
-  // Save the recording.
-  ////////
-
-  tb->save_recording(cl_get_recordingfile());
+  int simlen = 60;  
+  tb->tick(simlen);
 
   ////////
   // Display the results.

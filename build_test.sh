@@ -1,7 +1,3 @@
-C_FLAGS="-CFLAGS \"-std=c++11 -Wall -g -O0 -DAUXS\""
-
-LD_FLAGS="-LDFLAGS \"-pthread -lutil\""
-
 CC_FILES="dv/common_functions.cc \
 dv/auxloader.cc \
 dv/elfloader.cc \
@@ -36,10 +32,6 @@ TRACE_FLAGS="--trace-fst \
 --trace-structs \
 --trace-params \
 --trace-max-array 1024"
-
-# H_FILES=dv/elf.h \
-# dv/ticks.h \
-# dv/testbench.h
 
 SV_FILES=src/ariane_tiny_soc.sv
 

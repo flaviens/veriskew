@@ -6,7 +6,10 @@ Requirements: Verilator `Verilator 5.003 devel rev v4.228-192-g79682e607` and fu
 Tried on Ubuntu 22.04.
 
 ```
-bash run_test.sh
+bash build_test.sh # Verilate
+bash make_test.sh  # Make
+bash run_test.sh   # Run the simulation
+bash wave.sh       # Display the relevant waves
 ```
 
 ## Expected and actual results
@@ -21,10 +24,3 @@ As described by the SystemVerilog source, the signal `signal_1154` should follow
 ```
 
 However, in some occurrence, both signal go from zero to `0xfffff000` at the exact same time, instead of `signal_1154` having 1 cycle delay.
-
-```
---Tick 44--                                  
-After  eval 1 - 0672:fffff000, 1154:fffff000.
-Before eval 2 - 0672:fffff000, 1154:fffff000.
-After  eval 2 - 0672:fffff000, 1154:fffff000.
-```
